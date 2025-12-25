@@ -1,0 +1,55 @@
+{
+  "name": "@saksofon997/geocode",
+  "version": "0.1.0",
+  "description": "A modern ESM wrapper for Google Geocoding API",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run clean && npm run build",
+    "test": "node --import tsx --test src/*.test.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "google",
+    "geocoding",
+    "geocode",
+    "maps",
+    "address",
+    "location",
+    "coordinates",
+    "esm"
+  ],
+  "author": "saksofon997",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saksofon997/google-geocode-ts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/saksofon997/google-geocode-ts/issues"
+  },
+  "homepage": "https://github.com/saksofon997/google-geocode-ts#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
+
