@@ -28,4 +28,5 @@ coverage/
 
 # npm
 *.tgz
+.npmrc
 
