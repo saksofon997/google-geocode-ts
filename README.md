@@ -1,3 +1,5 @@
+[![npm](https://img.shields.io/npm/v/%40saksofon997%2Fgeocode?logo=npm)](https://www.npmjs.com/package/@saksofon997/geocode)
+
 # @saksofon997/geocode
 
 A modern, TypeScript-first ESM wrapper for the Google Geocoding API with built-in caching and rate limiting.
