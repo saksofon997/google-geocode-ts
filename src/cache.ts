@@ -1,21 +1,21 @@
 /**
  * Simple in-memory cache with TTL support
  */
-export interface CacheOptions {
+export type CacheOptions = {
   /** Time-to-live in milliseconds (default: 1 hour) */
   ttl?: number;
   /** Maximum number of entries (default: 1000) */
   maxSize?: number;
-}
+};
 
-interface CacheEntry<T> {
+type CacheEntry<T> = {
   value: T;
   expiresAt: number;
-}
+};
 
 /**
  * In-memory LRU cache with TTL support
- * 
+ *
  * @example
  * ```ts
  * const cache = new Cache<GeocodeResult[]>({ ttl: 3600000 }); // 1 hour
@@ -39,7 +39,7 @@ export class Cache<T> {
    */
   get(key: string): T | undefined {
     const entry = this.cache.get(key);
-    
+
     if (!entry) {
       return undefined;
     }
@@ -127,17 +127,17 @@ export class Cache<T> {
 /**
  * Generate a cache key from geocoding parameters
  */
-export function createCacheKey(params: Record<string, unknown>): string {
-  const sorted = Object.keys(params)
+export function createCacheKey(parameters: Record<string, unknown>): string {
+  const sorted = Object.keys(parameters)
     .sort()
-    .reduce((acc, key) => {
-      const value = params[key];
+    .reduce<Record<string, unknown>>((acc, key) => {
+      const value = parameters[key];
       if (value !== undefined && value !== null) {
         acc[key] = value;
       }
+
       return acc;
-    }, {} as Record<string, unknown>);
+    }, {});
 
   return JSON.stringify(sorted);
 }
-

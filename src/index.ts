@@ -4,7 +4,7 @@
  */
 
 // Main geocoder
-export { Geocoder, type GeocoderConfigWithFeatures } from './geocoder.js';
+export { Geocoder, type GeocoderConfigWithFeatures } from "./geocoder.js";
 
 // Errors
 export {
@@ -12,13 +12,17 @@ export {
   ApiKeyError,
   InvalidRequestError,
   NetworkError,
-} from './errors.js';
+} from "./errors.js";
 
 // Cache
-export { Cache, createCacheKey, type CacheOptions } from './cache.js';
+export { Cache, createCacheKey, type CacheOptions } from "./cache.js";
 
 // Rate limiter
-export { RateLimiter, RateLimitError, type RateLimiterOptions } from './rate-limiter.js';
+export {
+  RateLimiter,
+  RateLimitError,
+  type RateLimiterOptions,
+} from "./rateLimiter.js";
 
 // Types
 export type {
@@ -33,4 +37,4 @@ export type {
   PlusCode,
   GeocodeResult,
   GeocodeResponse,
-} from './types.js';
+} from "./types.js";

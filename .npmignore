@@ -15,4 +15,5 @@ coverage/
 # IDE
 .idea/
 .vscode/
+.husky/
 
