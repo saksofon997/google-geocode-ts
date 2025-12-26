@@ -1,4 +1,5 @@
 [![npm](https://img.shields.io/npm/v/%40saksofon997%2Fgeocode?logo=npm)](https://www.npmjs.com/package/@saksofon997/geocode)
+[![GitHub Actions](https://github.com/saksofon997/google-geocode-ts/actions/workflows/publish.yml/badge.svg)](https://github.com/saksofon997/google-geocode-ts/actions/workflows/publish.yml)
 
 # @saksofon997/geocode
 
