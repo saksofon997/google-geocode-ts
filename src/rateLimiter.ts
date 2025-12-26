@@ -1,7 +1,7 @@
 /**
  * Rate limiter options
  */
-export interface RateLimiterOptions {
+export type RateLimiterOptions = {
   /** Maximum requests per interval (default: 50) */
   maxRequests?: number;
   /** Interval in milliseconds (default: 1000 = 1 second) */
@@ -10,30 +10,30 @@ export interface RateLimiterOptions {
   queue?: boolean;
   /** Maximum queue size (default: 100) */
   maxQueueSize?: number;
-}
+};
 
-interface QueuedRequest {
+type QueuedRequest = {
   resolve: () => void;
   reject: (error: Error) => void;
-}
+};
 
 /**
  * Error thrown when rate limit is exceeded
  */
 export class RateLimitError extends Error {
-  constructor(message = 'Rate limit exceeded') {
+  constructor(message = "Rate limit exceeded") {
     super(message);
-    this.name = 'RateLimitError';
+    this.name = "RateLimitError";
   }
 }
 
 /**
  * Token bucket rate limiter with optional request queuing
- * 
+ *
  * @example
  * ```ts
  * const limiter = new RateLimiter({ maxRequests: 50, interval: 1000 });
- * 
+ *
  * // Will wait if rate limited (when queue: true)
  * await limiter.acquire();
  * // Make your API call here
@@ -44,7 +44,7 @@ export class RateLimiter {
   private readonly interval: number;
   private readonly shouldQueue: boolean;
   private readonly maxQueueSize: number;
-  
+
   private tokens: number;
   private lastRefill: number;
   private readonly queue: QueuedRequest[] = [];
@@ -55,7 +55,7 @@ export class RateLimiter {
     this.interval = options.interval ?? 1000;
     this.shouldQueue = options.queue ?? true;
     this.maxQueueSize = options.maxQueueSize ?? 100;
-    
+
     this.tokens = this.maxRequests;
     this.lastRefill = Date.now();
   }
@@ -77,7 +77,7 @@ export class RateLimiter {
     }
 
     if (this.queue.length >= this.maxQueueSize) {
-      throw new RateLimitError('Rate limit queue is full');
+      throw new RateLimitError("Rate limit queue is full");
     }
 
     // Start the refill timer if not running
@@ -125,11 +125,11 @@ export class RateLimiter {
     this.tokens = this.maxRequests;
     this.lastRefill = Date.now();
     this.stopRefillTimer();
-    
+
     // Reject all queued requests
     while (this.queue.length > 0) {
       const request = this.queue.shift();
-      request?.reject(new RateLimitError('Rate limiter was reset'));
+      request?.reject(new RateLimitError("Rate limiter was reset"));
     }
   }
 
@@ -146,10 +146,13 @@ export class RateLimiter {
   private refill(): void {
     const now = Date.now();
     const elapsed = now - this.lastRefill;
-    
+
     if (elapsed >= this.interval) {
       const intervals = Math.floor(elapsed / this.interval);
-      this.tokens = Math.min(this.maxRequests, this.tokens + intervals * this.maxRequests);
+      this.tokens = Math.min(
+        this.maxRequests,
+        this.tokens + intervals * this.maxRequests
+      );
       this.lastRefill = now - (elapsed % this.interval);
 
       // Process queued requests
@@ -188,7 +191,7 @@ export class RateLimiter {
     }, this.interval);
 
     // Unref the timer so it doesn't keep the process alive
-    if (typeof this.refillTimer === 'object' && 'unref' in this.refillTimer) {
+    if (typeof this.refillTimer === "object" && "unref" in this.refillTimer) {
       this.refillTimer.unref();
     }
   }
@@ -203,4 +206,3 @@ export class RateLimiter {
     }
   }
 }
-

@@ -1,0 +1,27 @@
+echo "[pre-commit hook] Running pre-commit hook..."
+
+echo "[pre-commit hook] BUMP VERSION USING 'npm version patch|minor|major' TO PUBLISH..."
+
+echo "[pre-commit hook] Checking code formatting and linting..."
+
+npx xo
+
+echo "[pre-commit hook] Running tests..."
+
+npm test
+
+echo "[pre-commit hook] Running type checking..."
+
+npx tsc --noEmit
+
+echo "[pre-commit hook] Checking build..."
+
+npm run build
+
+echo "[pre-commit hook] Running publish dry run..."
+
+npm publish --dry-run
+
+echo "[pre-commit hook] Exiting pre-commit hook..."
+
+npm run clean

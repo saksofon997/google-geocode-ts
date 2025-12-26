@@ -1,7 +1,7 @@
 /**
  * Configuration options for the Geocoder client
  */
-export interface GeocoderConfig {
+export type GeocoderConfig = {
   /** Your Google Maps API key */
   apiKey: string;
   /** Optional base URL override (useful for testing) */
@@ -12,12 +12,12 @@ export interface GeocoderConfig {
   language?: string;
   /** Default region bias */
   region?: string;
-}
+};
 
 /**
  * Options for geocoding an address
  */
-export interface GeocodeOptions {
+export type GeocodeOptions = {
   /** The address to geocode. Optional if `components` is provided. */
   address?: string;
   /** Component filters (country, postal_code, etc.). Optional if `address` is provided. */
@@ -31,12 +31,12 @@ export interface GeocodeOptions {
   language?: string;
   /** Region bias (overrides default) */
   region?: string;
-}
+};
 
 /**
  * Options for reverse geocoding coordinates
  */
-export interface ReverseGeocodeOptions {
+export type ReverseGeocodeOptions = {
   /** Latitude and longitude to reverse geocode */
   latlng: LatLng;
   /** Filter results by type */
@@ -45,74 +45,74 @@ export interface ReverseGeocodeOptions {
   locationType?: LocationType[];
   /** Language for results (overrides default) */
   language?: string;
-}
+};
 
 /**
  * Latitude and longitude coordinates
  */
-export interface LatLng {
+export type LatLng = {
   lat: number;
   lng: number;
-}
+};
 
 /**
  * Location types returned by the API
  */
-export type LocationType = 
-  | 'ROOFTOP'
-  | 'RANGE_INTERPOLATED'
-  | 'GEOMETRIC_CENTER'
-  | 'APPROXIMATE';
+export type LocationType =
+  | "ROOFTOP"
+  | "RANGE_INTERPOLATED"
+  | "GEOMETRIC_CENTER"
+  | "APPROXIMATE";
 
 /**
  * Result types used for filtering reverse geocoding responses.
  * (Based on the documented `result_type` options.)
  */
 export type ResultType =
-  | 'street_address'
-  | 'route'
-  | 'intersection'
-  | 'political'
-  | 'country'
-  | 'administrative_area_level_1'
-  | 'administrative_area_level_2'
-  | 'colloquial_area'
-  | 'locality'
-  | 'sublocality'
-  | 'neighborhood'
-  | 'premise'
-  | 'subpremise'
-  | 'postal_code'
-  | 'natural_feature'
-  | 'airport'
-  | 'park'
-  | 'point_of_interest';
+  | "street_address"
+  | "route"
+  | "intersection"
+  | "political"
+  | "country"
+  | "administrative_area_level_1"
+  | "administrative_area_level_2"
+  | "colloquial_area"
+  | "locality"
+  | "sublocality"
+  | "neighborhood"
+  | "premise"
+  | "subpremise"
+  | "postal_code"
+  | "natural_feature"
+  | "airport"
+  | "park"
+  | "point_of_interest";
 
 /**
  * Status codes returned by the Geocoding API
  */
 export type GeocodingStatus =
-  | 'OK'
-  | 'ZERO_RESULTS'
-  | 'OVER_DAILY_LIMIT'
-  | 'OVER_QUERY_LIMIT'
-  | 'REQUEST_DENIED'
-  | 'INVALID_REQUEST'
-  | 'UNKNOWN_ERROR';
+  | "OK"
+  | "ZERO_RESULTS"
+  | "OVER_DAILY_LIMIT"
+  | "OVER_QUERY_LIMIT"
+  | "REQUEST_DENIED"
+  | "INVALID_REQUEST"
+  | "UNKNOWN_ERROR";
 
 /**
  * Address component returned by the API
  */
-export interface AddressComponent {
+export type AddressComponent = {
   longName: string;
   shortName: string;
   types: string[];
-}
+};
 
 /**
  * Geometry information for a geocode result
  */
-export interface Geometry {
+export type Geometry = {
   location: LatLng;
   locationType: LocationType;
   viewport: {
@@ -123,20 +123,20 @@ export interface Geometry {
     northeast: LatLng;
     southwest: LatLng;
   };
-}
+};
 
 /**
  * Plus code information
  */
-export interface PlusCode {
+export type PlusCode = {
   globalCode: string;
   compoundCode?: string;
-}
+};
 
 /**
  * A single geocoding result
  */
-export interface GeocodeResult {
+export type GeocodeResult = {
   addressComponents: AddressComponent[];
   formattedAddress: string;
   geometry: Geometry;
@@ -146,30 +146,30 @@ export interface GeocodeResult {
   postcodeLocalities?: string[];
   types: string[];
   partialMatch?: boolean;
-}
+};
 
 /**
  * Response from the Geocoding API
  */
-export interface GeocodeResponse {
+export type GeocodeResponse = {
   status: GeocodingStatus;
   results: GeocodeResult[];
   /** Can be present for some responses */
   plusCode?: PlusCode;
   errorMessage?: string;
-}
+};
 
 /**
  * Raw Google Geocoding API response types (snake_case).
  * These reflect the wire format returned by Google.
  */
-export interface RawAddressComponent {
+export type RawAddressComponent = {
   long_name: string;
   short_name: string;
   types: string[];
-}
+};
 
-export interface RawGeometry {
+export type RawGeometry = {
   location: LatLng;
   location_type: LocationType;
   viewport: {
@@ -180,14 +180,14 @@ export interface RawGeometry {
     northeast: LatLng;
     southwest: LatLng;
   };
-}
+};
 
-export interface RawPlusCode {
+export type RawPlusCode = {
   global_code: string;
   compound_code?: string;
-}
+};
 
-export interface RawGeocodeResult {
+export type RawGeocodeResult = {
   address_components: RawAddressComponent[];
   formatted_address: string;
   geometry: RawGeometry;
@@ -196,12 +196,11 @@ export interface RawGeocodeResult {
   postcode_localities?: string[];
   types: string[];
   partial_match?: boolean;
-}
+};
 
-export interface RawGeocodeResponse {
+export type RawGeocodeResponse = {
   status: GeocodingStatus;
   results: RawGeocodeResult[];
   plus_code?: RawPlusCode;
   error_message?: string;
-}
-
+};

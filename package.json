@@ -25,7 +25,8 @@
     "clean": "rm -rf dist",
     "prepublishOnly": "npm run clean && npm run build",
     "test": "node --import tsx --test src/*.test.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepare": "husky install"
   },
   "keywords": [
     "google",
@@ -51,8 +52,34 @@
     "node": ">=18.0.0"
   },
   "devDependencies": {
+    "husky": "^9.1.7",
     "tsx": "^4.19.2",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "xo": "^1.2.3"
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "singleQuote": false,
+    "bracketSpacing": true
+  },
+  "xo": {
+    "space": true,
+    "prettier": true,
+    "rules": {
+      "unicorn/filename-case": [
+        "error",
+        {
+          "case": "camelCase"
+        }
+      ],
+      "@typescript-eslint/naming-convention": "off",
+      "@typescript-eslint/no-floating-promises": "off",
+      "@typescript-eslint/no-unsafe-call": "off",
+      "no-promise-executor-return": "off",
+      "unicorn/no-array-reduce": "off",
+      "unicorn/no-null": "off",
+      "@typescript-eslint/no-restricted-types": "off",
+      "@typescript-eslint/switch-exhaustiveness-check": "off"
+    }
   }
 }
-

@@ -1,16 +1,16 @@
-import type { GeocodingStatus } from './types.js';
+import type { GeocodingStatus } from "./types.js";
 
 /**
  * Base error class for geocoding errors
  */
 export class GeocodingError extends Error {
   readonly status: GeocodingStatus;
-  
+
   constructor(message: string, status: GeocodingStatus) {
     super(message);
-    this.name = 'GeocodingError';
+    this.name = "GeocodingError";
     this.status = status;
-    
+
     // Maintains proper stack trace for where our error was thrown
     if (Error.captureStackTrace) {
       Error.captureStackTrace(this, GeocodingError);
@@ -24,7 +24,7 @@ export class GeocodingError extends Error {
 export class ApiKeyError extends GeocodingError {
   constructor(message: string, status: GeocodingStatus) {
     super(message, status);
-    this.name = 'ApiKeyError';
+    this.name = "ApiKeyError";
   }
 }
 
@@ -33,8 +33,8 @@ export class ApiKeyError extends GeocodingError {
  */
 export class InvalidRequestError extends GeocodingError {
   constructor(message: string) {
-    super(message, 'INVALID_REQUEST');
-    this.name = 'InvalidRequestError';
+    super(message, "INVALID_REQUEST");
+    this.name = "InvalidRequestError";
   }
 }
 
@@ -42,9 +42,11 @@ export class InvalidRequestError extends GeocodingError {
  * Error thrown on network/timeout issues
  */
 export class NetworkError extends Error {
-  constructor(message: string, public readonly cause?: Error) {
+  constructor(
+    message: string,
+    public readonly cause?: Error
+  ) {
     super(message);
-    this.name = 'NetworkError';
+    this.name = "NetworkError";
   }
 }
-
