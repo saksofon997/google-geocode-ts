@@ -1,6 +1,6 @@
 {
   "name": "@saksofon997/geocode",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A modern ESM wrapper for Google Geocoding API",
   "type": "module",
   "main": "./dist/index.js",
